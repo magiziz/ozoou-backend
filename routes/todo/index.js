@@ -1,6 +1,6 @@
 // Setting up the dependencies
 const express = require("express");
-const postgress = require("../helpers/connection");
+const postgress = require("../../helpers");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 
@@ -15,9 +15,6 @@ router.get("/getListOfTodos", (req, res) => {
       .status(200)
       .send({ message: "Successfully fetched data", data: result.rows });
   });
-
-  const date = new Date();
-  console.log(date.toDateString());
 
   // Postgress end
   postgress.end;
@@ -50,7 +47,7 @@ router.post("/createTodo", (req, res) => {
           .send({ message: "Something went wrong!", data: err });
 
       // Else send the results
-      res.send({ message: "Successfully fetched data", data: result.rows });
+      res.send({ message: "Successfully created data", data: result.rows });
     }
   );
 
@@ -74,7 +71,7 @@ router.put("/updateTodoStatus", (req, res) => {
 
   // Else update the value
   postgress.query(
-    `UPDATE public.todo
+    `UPDATE todo
 	SET status='${status === "pending" ? "completed" : "pending"}'
 	WHERE id='${id}'`,
     (err, result) => {
@@ -85,9 +82,12 @@ router.put("/updateTodoStatus", (req, res) => {
           .send({ message: "Something went wrong", data: err });
 
       // Else send the results
-      res.send({ message: "Successfully fetched data", data: result.rows });
+      res.send({ message: "Successfully updated data", data: result.rows });
     }
   );
+
+  // Postgress end
+  postgress.end;
 });
 
 module.exports = router;
