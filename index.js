@@ -14,6 +14,6 @@ app.use(cors());
 // postgress connect
 postgress.connect();
 
-app.use("/oozou", router);
+app.use("/oozou/todo", router);
 
 app.listen(3001, () => console.log("Connected to PORT 5000"));
