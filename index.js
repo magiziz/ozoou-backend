@@ -18,4 +18,4 @@ postgress.connect();
 app.use("/oozou/todo", routerTodo);
 app.use("/oozou/todoChildren", routerTodoChildren);
 
-app.listen(3001, () => console.log("Connected to PORT 5000"));
+app.listen(3001, () => console.log("Connected to PORT 3001"));
